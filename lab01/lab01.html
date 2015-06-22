@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="sampleStore">
+<head>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<title>Learning Angular</title>
+</head>
+<body ng-controller="motorsController as motor">
+	<divclass="main-container row">
+		<div class="table-container col-md-6">
+			Make <input type="text" ng-model="search.make">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Make</th>
+						<th>Model</th>
+						<th>Payment</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="bike in motor.products | filter:search.make | orderBy:'make'">
+						<td>{{$index + 1}}</td>
+						<td>{{bike.make}}</td>
+						<td>{{bike.model}}</td>
+						<td>{{bike.price | currency}}</td>
+					</tr>
+				</tbody>
+			</table>
+			Total bikes: {{motor.products.length}}
+		</div>
+	</div>
+</body>
+</html>
