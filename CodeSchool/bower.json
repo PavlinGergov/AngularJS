@@ -1,0 +1,20 @@
+{
+  "name": "1-Challenge",
+  "version": "0.0.0",
+  "authors": [
+    "Pavlin Gergov <pgergov92@abv.bg>"
+  ],
+  "description": "first task from the tutorial",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.1"
+  }
+}
