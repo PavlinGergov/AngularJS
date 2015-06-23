@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music artists</title>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body ng-app="musicApp" ng-controller="PageController">
+	<div class="navbar navbar-default">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <a href="./" class="navbar-brand">Music Artists</a>
+	    </div>
+	    <div class="navbar-collapse collapse" id="navbar-main">
+	      <ul class="nav navbar-nav">
+	    		<li>
+	    			<a href="a">Add Artist</a>
+	    		</li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="container">
+		this is2 + 4 : {{2 + 4}}
+	</div>
+
+	<footer class="text-center">
+		<hr />
+		<small>
+			Author: {{author}}
+		</small>
+	</footer>
+
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/PageController.js"></script>
+</body>
+</html>

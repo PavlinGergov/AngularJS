@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music artists</title>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body ng-app="musicApp" ng-controller="PageController" ng-cloak>
+	<div class="navbar navbar-default">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <a href="./" class="navbar-brand">Music Artists</a>
+	    </div>
+	    <div class="navbar-collapse collapse" id="navbar-main">
+	      <ul class="nav navbar-nav">
+	    		<li>
+	    			<a href="#">Add Artist</a>
+	    		</li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="container" ng-controller="ArtistDetailsController">
+		<div class="jumbotron">
+			<div class="row">
+				<div class="col-md-6">
+					<h2>{{ artist.name }}</h2>
+					<p>
+						<strong>Since: </strong> <span class="pull-right">{{artist.created}}</span>
+					</p>
+					<p>
+						<strong>Location: </strong> <span class="pull-right">{{artist.additionalInformation.location}}</span>
+					</p>
+					<p>
+						<strong>More information: </strong>
+						<button class="btn btn-default btn-sm pull-right" ng-click="showMoreInfo()"> {{showInfoText}} </button>
+						<div ng-hide="hideInformation">
+							<blockquote>
+								<p>
+									<strong>Location: </strong> {{artist.additionalInformation.location}}
+								</p>
+								<p>
+									<strong>Albums: </strong> {{artist.additionalInformation.albums}}
+								</p>
+								<p>
+									<strong>Singles: </strong> {{artist.additionalInformation.singles}}
+								</p>
+							</blockquote>
+						</div>
+					</p>
+					<p>
+						<strong>Band members: </strong>
+						<button class="btn btn-default btn-sm pull-right" ng-click="showBandMembers()"> {{showBandMembersText}} </button>
+						<ul class="list-group" ng-hide="hideBandMembers">
+							<li class="list-group-item" ng-repeat="member in artist.additionalInformation.bandMembers">{{member}}</li>
+						</ul>
+					</p>
+					<p><strong>Records: </strong> {{artist.additionalInformation.albums}} albums and {{artist.additionalInformation.singles}} singles
+						<button class="btn btn-default btn-sm pull-right" ng-click="showAndHideRecords()">{{bandRecordsShowText}}</button>
+						<div class="container records-container row" ng-show="bandRecordsShown">
+							<div class="search-and-filter row">
+								<div class="col-md-6">
+									Sort:
+									<select class="form-control" ng-model="sort">
+										<option value="name">Name</option>
+										<option value="year">Year</option>
+										<option value="price">Price</option>
+										<option value="-rating">Rating</option>
+									</select>
+								</div>
+								<div class="form-group col-md-6">
+									Search album:
+									<input class="form-control" type="text" ng-model="search"/>
+								</div>
+							</div>
+							<ul class="nav nav-tabs">
+								<li ng-repeat="album in artist.albums | limitTo: 3 | orderBy: sort | filter: search">
+									<a href="#album-{{album.id}}" data-toggle="tab">{{album.name}}</a>
+								</li>
+								<li>
+									<a href="">See all</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade" id="album-{{album.id}}" ng-repeat="album in artist.albums | limitTo: 3">
+									<div class="panel panel-default">
+										<div class="panel-body row">
+											<div class="col-md-6">
+												<p>
+													<strong>{{album.name | uppercase}}</strong>
+												</p>
+												<p>
+													<strong>Year: </strong>{{album.year}}
+												</p>
+												<p>
+													<strong>Songs: </strong>{{album.songs}}
+												</p>
+												<p>
+													<strong>Price: </strong>{{album.price | currency}}
+												</p>
+												<p>
+													<strong>Rating: </strong>{{album.rating | number: 1}} 
+													<button class="btn btn-success btn-sm" ng-click="upVoteRating(album)">+</button>
+													<button class="btn btn-danger btn-sm" ng-click="downVoteRating(album)">-</button>
+												</p>
+												<p>
+													<strong>Status: </strong> {{album.status | status}}
+												</p>
+											</div>
+											<div class="col-md-6 image-container">
+												<img ng-src="{{album.image}}" src="" alt="{{album.name}}">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</p>
+				</div>
+				<div class="col-md-6 image-container">
+					<img src="{{artist.img}}">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="text-center">
+		<hr />
+		<small>
+			Author: {{author}}
+		</small>
+	</footer>
+
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/PageController.js"></script>
+	<script type="text/javascript" src="js/controllers/ArtistDetailsController.js"></script>
+	<script type="text/javascript" src="js/filters/statusFilter.js"></script>
+</body>
+</html>
